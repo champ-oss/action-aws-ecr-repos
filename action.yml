@@ -36,10 +36,8 @@ runs:
     - run: |
         terraform init
         
-        while IFS= read -r line || [[ -n $line ]]; do
-          echo "Trying to import ECR repo: ${line}"
-          terraform import 'module.this["$line"].aws_ecr_repository.this' $line || true
-        done < <(printf '%s' "${{ inputs.names }}")
+        terraform import 'module.this["test1"].aws_ecr_repository.this' test1 || true
+        terraform import 'module.this["test2"].aws_ecr_repository.this' test2 || true
         
         terraform state list
         terraform apply -auto-approve

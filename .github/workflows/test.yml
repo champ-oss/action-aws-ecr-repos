@@ -1,0 +1,25 @@
+name: test
+on: push
+
+jobs:
+  test:
+    runs-on: ubuntu-latest
+    permissions:
+      id-token: write # required for aws-actions/configure-aws-credentials
+    steps:
+      - uses: actions/checkout@v4 # https://github.com/actions/checkout/releases
+      - uses: hashicorp/setup-terraform@v2 # https://github.com/hashicorp/setup-terraform/tags
+        with:
+          terraform_version: 1.5.7 # https://github.com/hashicorp/terraform/tags
+          terraform_wrapper: false
+      - uses: aws-actions/configure-aws-credentials@v4 # https://github.com/aws-actions/configure-aws-credentials/tags
+        with:
+          role-to-assume: arn:aws:iam::${{ vars.AWS_ACCOUNT_ID }}:role/${{ vars.AWS_ROLE_NAME }}
+          aws-region: ${{ vars.AWS_DEFAULT_REGION }}
+      - uses: ./
+        with:
+          names: |
+            test1
+            test2
+          trusted_accounts: |
+            ${{ vars.AWS_ACCOUNT_ID }}

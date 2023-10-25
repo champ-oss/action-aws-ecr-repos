@@ -1,4 +1,5 @@
 import sys
+import os
 
-print(sys.argv[1].split("\\n"))
-print(sys.argv[1].splitlines())
+for name in sys.argv[1].splitlines():
+    os.system(f"terraform import 'module.this[\"{name}\"].aws_ecr_repository.this' {name}")

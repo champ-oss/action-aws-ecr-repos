@@ -35,7 +35,7 @@ runs:
   steps:
     - run: |
         for name in "${{ inputs.names }}"; do
-          echo $name
+          terraform import 'module.this["$name"].aws_ecr_repository.this' $name
         done
         
         #terraform init

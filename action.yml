@@ -34,7 +34,7 @@ runs:
   using: "composite"
   steps:
     - run: |
-        export names=${{ inputs.names }}
+        export names="${{ inputs.names }}"
         terraform init
         for name in "${names[@]}"; do
           echo Trying to import $name

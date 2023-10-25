@@ -34,8 +34,9 @@ runs:
   using: "composite"
   steps:
     - run: |
+        export names=${{ inputs.names }}
         terraform init
-        for name in "${{ inputs.names }}"; do
+        for name in "${names[@]}"; do
           echo Trying to import $name
           terraform import 'module.this["$name"].aws_ecr_repository.this' $name
         done

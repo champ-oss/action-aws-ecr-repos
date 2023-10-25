@@ -35,10 +35,7 @@ runs:
   steps:
     - run: |
         terraform init
-        
-        terraform import 'module.this["test1"].aws_ecr_repository.this' test1 || true
-        terraform import 'module.this["test2"].aws_ecr_repository.this' test2 || true
-        
+        python terraform_import.py "${{ inputs.names }}"
         terraform state list
         terraform apply -auto-approve
       working-directory: ${{ github.action_path }}

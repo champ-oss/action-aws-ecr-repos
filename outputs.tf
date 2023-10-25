@@ -1,9 +1,9 @@
 output "names" {
-  value = var.names
+  value = split("\n", var.names)
 }
 
 output "trusted_accounts" {
-  value = var.trusted_accounts
+  value = split("\n", var.trusted_accounts)
 }
 
 output "image_tag_mutability" {

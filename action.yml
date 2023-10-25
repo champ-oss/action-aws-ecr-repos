@@ -6,7 +6,7 @@ inputs:
     required: true
   trusted_accounts:
     description: 'trusted accounts that are allowed to pull images'
-    required: true
+    required: false
   image_tag_mutability:
     description: 'https://registry.terraform.io/providers/hashicorp/aws/latest/docs/resources/ecr_repository#argument-reference'
     required: false

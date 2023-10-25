@@ -16,10 +16,13 @@ jobs:
         with:
           role-to-assume: arn:aws:iam::${{ vars.AWS_ACCOUNT_ID }}:role/${{ vars.AWS_ROLE_NAME }}
           aws-region: ${{ vars.AWS_DEFAULT_REGION }}
+      - name: Create example accounts SSM
+        working-directory: example_ssm
+        run: |
+          terraform init
+          terraform apply -auto-approve
       - uses: ./
         with:
           names: |
             test1
             test2
-          trusted_accounts: |
-            ${{ vars.AWS_ACCOUNT_ID }}

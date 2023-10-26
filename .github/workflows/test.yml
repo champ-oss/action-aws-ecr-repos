@@ -21,6 +21,27 @@ jobs:
         run: |
           terraform init
           terraform apply -auto-approve || true
+
+      # Share the ECR repos with the specified trusted_accounts
+      - uses: ./
+        with:
+          names: |
+            test1
+            test2
+          trusted_accounts: |
+            081040173940
+            477331159723
+            912455136424
+
+      # Get a list of trusted accounts from SSM parameter as a comma separated string
+      - uses: ./
+        with:
+          trusted_accounts_ssm: example-aws-accounts
+          names: |
+            test1
+            test2
+
+      # Get a list of trusted accounts from SSM parameter as a comma separated string and combine that with the specified trusted_accounts
       - uses: ./
         with:
           trusted_accounts_ssm: example-aws-accounts
@@ -31,3 +52,8 @@ jobs:
             081040173940
             477331159723
             912455136424
+
+      # Simple example
+      - uses: ./
+        with:
+          names: test1

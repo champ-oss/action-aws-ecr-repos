@@ -8,6 +8,12 @@ variable "trusted_accounts" {
   type        = string
 }
 
+variable "trusted_accounts_ssm" {
+  description = ""
+  type        = string
+  nullable    = false
+}
+
 variable "image_tag_mutability" {
   description = ""
   type        = string

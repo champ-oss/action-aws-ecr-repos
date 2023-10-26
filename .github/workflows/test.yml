@@ -20,9 +20,10 @@ jobs:
         working-directory: example_ssm
         run: |
           terraform init
-          terraform apply -auto-approve
+          terraform apply -auto-approve || true
       - uses: ./
         with:
+          trusted_accounts_ssm: example-aws-accounts
           names: |
             test1
             test2

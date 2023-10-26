@@ -1,3 +1,18 @@
+data "aws_caller_identity" "this" {}
+
+locals {
+  #trusted_accounts =
+}
+
+data "aws_ssm_parameter" "this" {
+  count = var.trusted_accounts_ssm != "" ? 1 : 0
+  name  = var.trusted_accounts_ssm
+}
+
+output "test" {
+  value = var.trusted_accounts_ssm != "" ? data.aws_ssm_parameter.this.value : null
+}
+
 module "this" {
   for_each             = toset(split("\n", trimspace(var.names)))
   source               = "github.com/champ-oss/terraform-aws-ecr.git?ref=v1.0.88-7582d14"

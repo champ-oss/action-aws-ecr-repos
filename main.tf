@@ -10,7 +10,7 @@ data "aws_ssm_parameter" "this" {
 }
 
 output "test" {
-  value = var.trusted_accounts_ssm != "" ? data.aws_ssm_parameter.this.value : null
+  value = var.trusted_accounts_ssm != "" ? data.aws_ssm_parameter.this[0].value : null
 }
 
 module "this" {

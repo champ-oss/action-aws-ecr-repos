@@ -35,7 +35,6 @@ jobs:
           trusted_accounts: |
             081040173940
             477331159723
-
       - name: Validate ECR Policy
         run: |
           python3 validate_ecr.py test1 081040173940,477331159723,912455136424
@@ -48,7 +47,6 @@ jobs:
           names: |
             test1
             test2
-
       - name: Validate ECR Policy
         run: |
           python3 validate_ecr.py test1 912455136424,432418664414,266458841044
@@ -64,7 +62,6 @@ jobs:
           trusted_accounts: |
             081040173940
             477331159723
-
       - name: Validate ECR Policy
         run: |
           python3 validate_ecr.py test1 081040173940,477331159723,912455136424,432418664414,266458841044
@@ -74,7 +71,10 @@ jobs:
         uses: ./
         with:
           names: test1
-
       - name: Validate ECR Policy
-        run: |
-          python3 validate_ecr.py test1 912455136424
+        run: python3 validate_ecr.py test1 912455136424
+
+      - name: Remove example accounts SSM
+        if: always()
+        working-directory: example_ssm
+        run: terraform destroy -auto-approve || true

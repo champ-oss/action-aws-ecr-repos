@@ -1,7 +1,7 @@
 data "aws_caller_identity" "this" {}
 
 locals {
-  #trusted_accounts =
+  trusted_accounts_ssm_list = var.trusted_accounts_ssm != "" ? split(",", data.aws_ssm_parameter.this[0].value) : []
 }
 
 data "aws_ssm_parameter" "this" {
@@ -10,7 +10,8 @@ data "aws_ssm_parameter" "this" {
 }
 
 output "test" {
-  value = var.trusted_accounts_ssm != "" ? data.aws_ssm_parameter.this[0].value : null
+  value     = trusted_accounts_ssm_list
+  sensitive = false
 }
 
 module "this" {

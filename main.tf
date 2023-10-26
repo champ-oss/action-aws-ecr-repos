@@ -3,7 +3,7 @@ data "aws_caller_identity" "this" {}
 locals {
   local_account_list        = [data.aws_caller_identity.this.account_id]
   trusted_accounts_list     = split("\n", trimspace(var.trusted_accounts))
-  trusted_accounts_ssm_list = var.trusted_accounts_ssm != "" ? trimspace(split(",", data.aws_ssm_parameter.trusted_accounts_ssm[0].value)) : []
+  trusted_accounts_ssm_list = var.trusted_accounts_ssm != "" ? split(",", trimspace(data.aws_ssm_parameter.trusted_accounts_ssm[0].value)) : []
 }
 
 data "aws_ssm_parameter" "trusted_accounts_ssm" {

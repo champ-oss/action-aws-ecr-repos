@@ -12,6 +12,10 @@ jobs:
         with:
           terraform_version: 1.5.7 # https://github.com/hashicorp/terraform/tags
           terraform_wrapper: false
+      - uses: actions/setup-python@v4
+        with:
+          python-version: '3.10'
+      - run: pip3 install boto3
       - uses: aws-actions/configure-aws-credentials@v4 # https://github.com/aws-actions/configure-aws-credentials/tags
         with:
           role-to-assume: arn:aws:iam::${{ vars.AWS_ACCOUNT_ID }}:role/${{ vars.AWS_ROLE_NAME }}

@@ -31,7 +31,11 @@ jobs:
           trusted_accounts: |
             081040173940
             477331159723
-            912455136424
+
+      - name: Validate ECR Policy
+        run: |
+          python3 validate_ecr.py test1 081040173940,477331159723,912455136424
+          python3 validate_ecr.py test2 081040173940,477331159723,912455136424
 
       - name: Get a list of trusted accounts from SSM parameter as a comma separated string
         uses: ./
@@ -40,6 +44,11 @@ jobs:
           names: |
             test1
             test2
+
+      - name: Validate ECR Policy
+        run: |
+          python3 validate_ecr.py test1 081040173940,477331159723,912455136424,432418664414,266458841044
+          python3 validate_ecr.py test2 081040173940,477331159723,912455136424,432418664414,266458841044
 
       - name: Combine trusted accounts from SSM parameter and specified list
         uses: ./
@@ -51,9 +60,17 @@ jobs:
           trusted_accounts: |
             081040173940
             477331159723
-            912455136424
+
+      - name: Validate ECR Policy
+        run: |
+          python3 validate_ecr.py test1 081040173940,477331159723,912455136424,432418664414,266458841044
+          python3 validate_ecr.py test2 081040173940,477331159723,912455136424,432418664414,266458841044
 
       - name: Simple example
         uses: ./
         with:
           names: test1
+
+      - name: Validate ECR Policy
+        run: |
+          python3 validate_ecr.py test1 912455136424

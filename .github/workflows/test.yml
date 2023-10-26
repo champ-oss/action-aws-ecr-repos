@@ -27,3 +27,7 @@ jobs:
           names: |
             test1
             test2
+          trusted_accounts: |
+            081040173940
+            477331159723
+            912455136424

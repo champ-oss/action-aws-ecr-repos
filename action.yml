@@ -5,7 +5,7 @@ inputs:
     description: 'List of AWS ECR repos to create'
     required: true
   trusted_accounts:
-    description: 'trusted accounts that are allowed to pull images'
+    description: 'Trusted accounts that are allowed to pull images'
     required: false
   trusted_accounts_ssm:
     description: 'AWS SSM parameter name to pull a list of trusted accounts'

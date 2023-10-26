@@ -13,7 +13,7 @@ module "this" {
   for_each             = toset(split("\n", trimspace(var.names)))
   source               = "github.com/champ-oss/terraform-aws-ecr.git?ref=v1.0.88-7582d14"
   name                 = each.value
-  trusted_accounts     = local.trusted_accounts != [] ? local.trusted_accounts : null
+  trusted_accounts     = local.trusted_accounts != toset([]) ? local.trusted_accounts : null
   image_tag_mutability = var.image_tag_mutability
   encryption_type      = var.encryption_type
   scan_on_push         = tobool(var.scan_on_push)

@@ -24,6 +24,7 @@ jobs:
         working-directory: example_ssm
         run: |
           terraform init
+          terraform import aws_ssm_parameter.accounts example-aws-accounts || true
           terraform apply -auto-approve || true
 
       - name: Share the ECR repos with the specified trusted_accounts
@@ -36,9 +37,7 @@ jobs:
             081040173940
             477331159723
       - name: Validate ECR Policy
-        run: |
-          python3 validate_ecr.py test1 081040173940,477331159723,912455136424
-          python3 validate_ecr.py test2 081040173940,477331159723,912455136424
+        run: python3 validate_ecr.py test1,test2 081040173940,477331159723,912455136424
 
       - name: Get a list of trusted accounts from SSM parameter as a comma separated string
         uses: ./
@@ -48,9 +47,7 @@ jobs:
             test1
             test2
       - name: Validate ECR Policy
-        run: |
-          python3 validate_ecr.py test1 912455136424,432418664414,266458841044
-          python3 validate_ecr.py test2 912455136424,432418664414,266458841044
+        run: python3 validate_ecr.py test1,test2 912455136424,432418664414,266458841044
 
       - name: Combine trusted accounts from SSM parameter and specified list
         uses: ./
@@ -63,9 +60,7 @@ jobs:
             081040173940
             477331159723
       - name: Validate ECR Policy
-        run: |
-          python3 validate_ecr.py test1 081040173940,477331159723,912455136424,432418664414,266458841044
-          python3 validate_ecr.py test2 081040173940,477331159723,912455136424,432418664414,266458841044
+        run: python3 validate_ecr.py test1,test2 081040173940,477331159723,912455136424,432418664414,266458841044
 
       - name: Simple example
         uses: ./
@@ -73,8 +68,3 @@ jobs:
           names: test1
       - name: Validate ECR Policy
         run: python3 validate_ecr.py test1 912455136424
-
-      - name: Remove example accounts SSM
-        if: always()
-        working-directory: example_ssm
-        run: terraform destroy -auto-approve || true

@@ -51,8 +51,8 @@ jobs:
 
       - name: Validate ECR Policy
         run: |
-          python3 validate_ecr.py test1 081040173940,477331159723,912455136424,432418664414,266458841044
-          python3 validate_ecr.py test2 081040173940,477331159723,912455136424,432418664414,266458841044
+          python3 validate_ecr.py test1 477331159723,912455136424,432418664414,266458841044
+          python3 validate_ecr.py test2 477331159723,912455136424,432418664414,266458841044
 
       - name: Combine trusted accounts from SSM parameter and specified list
         uses: ./

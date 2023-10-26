@@ -13,4 +13,4 @@ policy = json.loads(response.get('policyText'))
 aws_principals = policy['Statement'][0]['Principal']['AWS']
 
 for expected_account in expected_accounts:
-    assert f'arn:aws:iam::{expected_account}:root' in aws_principals, f'{aws_principals} does not contain {expected_account}'
+    assert f'arn:aws:iam::{expected_account}:root' in aws_principals, f'{aws_principals} does not contain account: {expected_account}'

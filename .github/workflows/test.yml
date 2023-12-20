@@ -8,7 +8,7 @@ jobs:
       id-token: write # required for aws-actions/configure-aws-credentials
     steps:
       - uses: actions/checkout@v4 # https://github.com/actions/checkout/releases
-      - uses: hashicorp/setup-terraform@v2 # https://github.com/hashicorp/setup-terraform/tags
+      - uses: hashicorp/setup-terraform@v3 # https://github.com/hashicorp/setup-terraform/tags
         with:
           terraform_version: 1.5.7 # https://github.com/hashicorp/terraform/tags
           terraform_wrapper: false

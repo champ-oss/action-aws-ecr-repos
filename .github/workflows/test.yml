@@ -12,54 +12,9 @@ jobs:
         with:
           terraform_version: 1.5.7 # https://github.com/hashicorp/terraform/tags
           terraform_wrapper: false
-      - uses: actions/setup-python@v5
-        with:
-          python-version: '3.10'
-      - run: pip3 install boto3
-      - uses: aws-actions/configure-aws-credentials@v4 # https://github.com/aws-actions/configure-aws-credentials/tags
-        with:
-          role-to-assume: arn:aws:iam::${{ vars.AWS_ACCOUNT_ID }}:role/${{ vars.AWS_ROLE_NAME }}
-          aws-region: ${{ vars.AWS_DEFAULT_REGION }}
-      - name: Create example accounts SSM
-        working-directory: example_ssm
-        run: |
-          terraform init
-          terraform import aws_ssm_parameter.accounts example-aws-accounts || true
-          terraform apply -auto-approve || true
-
-      - name: Share the ECR repos with the specified trusted_accounts
-        uses: ./
-        with:
-          names: |
-            test1
-            test2
-          trusted_accounts: |
-            081040173940
-            477331159723
-      - run: python3 validate_ecr.py test1,test2 081040173940,477331159723
-
-      - name: Get a list of trusted accounts from SSM parameter as a comma separated string
-        uses: ./
-        with:
-          trusted_accounts_ssm: example-aws-accounts
-          names: |
-            test1
-            test2
-      - run: python3 validate_ecr.py test1,test2 432418664414,266458841044
-
-      - name: Combine trusted accounts from SSM parameter and specified list
-        uses: ./
-        with:
-          trusted_accounts_ssm: example-aws-accounts
-          names: |
-            test1
-            test2
-          trusted_accounts: |
-            081040173940
-            477331159723
-      - run: python3 validate_ecr.py test1,test2 081040173940,477331159723,432418664414,266458841044
 
       - name: Simple example
-        uses: ./
+        uses: ../.. # path to the action
         with:
-          names: test1
+          names: 'test-repo-1,test-repo-2'
+          trusted_org: '${{ vars.AWS_ORG_ID }}'

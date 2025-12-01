@@ -4,12 +4,9 @@ inputs:
   names:
     description: 'List of AWS ECR repos to create'
     required: true
-  trusted_accounts:
-    description: 'Trusted accounts that are allowed to pull images'
-    required: false
-  trusted_accounts_ssm:
-    description: 'AWS SSM parameter name to pull a list of trusted accounts'
-    required: false
+  trusted_org:
+    description: 'Trusted org that is allowed to pull images'
+    required: true
   image_tag_mutability:
     description: 'https://registry.terraform.io/providers/hashicorp/aws/latest/docs/resources/ecr_repository#argument-reference'
     required: false
@@ -44,8 +41,7 @@ runs:
       shell: bash
       env:
         TF_VAR_names: ${{ inputs.names }}
-        TF_VAR_trusted_accounts: ${{ inputs.trusted_accounts }}
-        TF_VAR_trusted_accounts_ssm: ${{ inputs.trusted_accounts_ssm }}
+        TF_VAR_trusted_org: ${{ inputs.trusted_org }}
         TF_VAR_image_tag_mutability: ${{ inputs.image_tag_mutability }}
         TF_VAR_encryption_type: ${{ inputs.encryption_type }}
         TF_VAR_scan_on_push: ${{ inputs.scan_on_push }}

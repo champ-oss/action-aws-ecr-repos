@@ -4,14 +4,8 @@ variable "names" {
   nullable    = false
 }
 
-variable "trusted_accounts" {
-  description = "Trusted accounts that are allowed to pull images"
-  type        = string
-  nullable    = false
-}
-
-variable "trusted_accounts_ssm" {
-  description = "AWS SSM parameter name to pull a list of trusted accounts"
+variable "trusted_org" {
+  description = "Trusted org that is allowed to pull images"
   type        = string
   nullable    = false
 }

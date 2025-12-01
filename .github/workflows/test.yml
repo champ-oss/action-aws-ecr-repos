@@ -14,7 +14,7 @@ jobs:
           terraform_wrapper: false
 
       - name: Simple example
-        uses: ../../ # path to the action
+        uses: ./
         with:
           names: 'test-repo-1,test-repo-2'
-          trusted_org: '${{ vars.AWS_ORG_ID }}'
+          trusted_org: 'my-trusted-org'

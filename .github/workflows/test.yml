@@ -26,5 +26,5 @@ jobs:
           names: |
             test-repo-1
             test-repo-2
-          trusted_org: ${{ secrets.AWS_ORG_ID }}
+          trusted_org: 'my-trusted-org'
 

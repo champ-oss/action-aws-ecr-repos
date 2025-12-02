@@ -20,6 +20,8 @@ jobs:
       - name: Run custom action
         uses: ./
         with:
-          names: test-repo-1,test-repo-2
+          names: |
+            test-repo-1
+            test-repo-2
           trusted_org: ${{ secrets.AWS_ORG_ID }}
 

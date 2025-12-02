@@ -9,3 +9,12 @@ module "this" {
   force_delete                = tobool(var.force_delete)
   image_limit                 = tonumber(var.image_limit)
 }
+
+terraform {
+  required_providers {
+    aws = {
+      source  = "hashicorp/aws"
+      version = "~> 5.0"
+    }
+  }
+}

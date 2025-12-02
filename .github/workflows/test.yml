@@ -5,16 +5,17 @@ jobs:
   test:
     runs-on: ubuntu-latest
     permissions:
-      id-token: write # required for aws-actions/configure-aws-credentials
+      id-token: write
     steps:
-      - uses: actions/checkout@v4 # https://github.com/actions/checkout/releases
-      - uses: hashicorp/setup-terraform@v3 # https://github.com/hashicorp/setup-terraform/tags
-        with:
-          terraform_version: 1.5.7 # https://github.com/hashicorp/terraform/tags
-          terraform_wrapper: false
+      - uses: actions/checkout@v4
 
-      - name: Simple example
+      - uses: hashicorp/setup-terraform@v3
+        with:
+          terraform_version: 1.5.7
+
+      - name: Run custom action
         uses: ./
         with:
-          names: 'test-repo-1,test-repo-2'
-          trusted_org: 'my-trusted-org'
+          names: test-repo-1,test-repo-2
+          trusted_org: ${{ secrets.AWS_ORG_ID }}
+

@@ -1,6 +1,6 @@
 module "this" {
   for_each                    = toset(split("\n", trimspace(var.names)))
-  source                      = "github.com/champ-oss/terraform-aws-ecr.git?ref=v1.0.91-9b7a1d8"
+  source                      = "github.com/champ-oss/terraform-aws-ecr.git?ref=v1.0.92-3a11104"
   name                        = each.value
   trusted_principal_org_paths = "${var.trusted_org}/*"
   image_tag_mutability        = var.image_tag_mutability

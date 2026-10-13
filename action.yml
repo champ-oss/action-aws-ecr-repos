@@ -28,7 +28,7 @@ inputs:
   image_limit:
     description: 'If not null, a default lifecycle policy will be deployed to prune repository images to this limit'
     required: false
-    default: '8000'
+    default: '80000'
 
 runs:
   using: "composite"
